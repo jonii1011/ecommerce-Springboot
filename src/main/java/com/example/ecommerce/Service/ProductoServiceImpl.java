@@ -20,7 +20,9 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     public List<ProductoDTO> listarProductos() {
         List<Producto> productos = productoRepository.findAll();
-        return productos.stream().map(this::convertirAProductoDTO)
+        return productos.stream()
+                .filter(producto -> !producto.isBorrado()) // Filtra los productos borrados
+                .map(this::convertirAProductoDTO)
                 .collect(Collectors.toList());
     }
 

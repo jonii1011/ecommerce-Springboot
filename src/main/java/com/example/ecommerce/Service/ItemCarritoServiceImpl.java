@@ -29,8 +29,8 @@ public class ItemCarritoServiceImpl implements ItemCarritoService {
     @Override
     public ItemCarrito crearItemCarrito(ItemCarritoDTO itemCarritodto) {
         ItemCarrito itemCarrito = new ItemCarrito();
-        itemCarrito.setIdCarrito(itemCarritodto.getIdCarrito());
-        itemCarrito.setIdProducto(itemCarritodto.getIdProducto());
+        itemCarrito.setCarrito(itemCarritodto.getCarrito());
+        itemCarrito.setProducto(itemCarritodto.getProducto());
         itemCarrito.setCantidad(itemCarritodto.getCantidad());
         return itemCarritoRepository.save(itemCarrito);
     }
@@ -49,8 +49,8 @@ public class ItemCarritoServiceImpl implements ItemCarritoService {
     @Override
     public ItemCarritoDTO convertirADTO(ItemCarrito itemCarrito) {
         ItemCarritoDTO dto = new ItemCarritoDTO();
-        dto.setIdCarrito(itemCarrito.getIdCarrito());
-        dto.setIdProducto(itemCarrito.getIdProducto());
+        dto.setCarrito(itemCarrito.getCarrito());
+        dto.setProducto(itemCarrito.getProducto());
         dto.setCantidad(itemCarrito.getCantidad());
         return dto;
     }

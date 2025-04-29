@@ -1,5 +1,8 @@
 package com.example.ecommerce.Dto;
 
+import com.example.ecommerce.Model.Rol;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -10,10 +13,21 @@ import lombok.Setter;
 @Setter
 public class UsuarioDTO {
     private Long id;
-    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
-
-    @Email(message = "El email debe ser válido")
-    @NotBlank(message = "El email es obligatorio")
     private String email;
+    private String password;
+    @Enumerated(EnumType.STRING)
+    private Rol rol; // Enum para roles (USER, ADMIN)
+
+    public UsuarioDTO() {
+        this.rol = Rol.USER;
+    }
+
+    public UsuarioDTO(Long id, String nombre, String email, String password, Rol rol) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.rol = rol != null ? rol : Rol.USER; // Asignar rol por defecto si es null
+    }
 }

@@ -6,7 +6,9 @@ import com.example.ecommerce.Repository.CarritoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CarritoServiceImpl implements CarritoService {
@@ -15,11 +17,19 @@ public class CarritoServiceImpl implements CarritoService {
     private CarritoRepository carritoRepository;
 
     @Override
-    public Carrito crearCarrito(CarritoDTO carritoDTO) {
+    public List<CarritoDTO> obtenerCarritos() {
+        List<Carrito> carritos = carritoRepository.findAll();
+        return carritos.stream().map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public CarritoDTO crearCarrito(CarritoDTO carritoDTO) {
         Carrito carrito = new Carrito();
-        carrito.setIdUsuario(carritoDTO.getIdUsuario());
+        carrito.setUsuario(carritoDTO.getUsuario());
         carrito.setItems(carritoDTO.getItems());
-        return carritoRepository.save(carrito);
+        Carrito nuevoCarrito = carritoRepository.save(carrito);
+        return convertirADTO(nuevoCarrito);  // Asegúrate de convertir el objeto `Carrito` a `CarritoDTO`
     }
 
     @Override
@@ -36,7 +46,7 @@ public class CarritoServiceImpl implements CarritoService {
     @Override
     public CarritoDTO convertirADTO(Carrito carrito) {
         CarritoDTO dto = new CarritoDTO();
-        dto.setIdUsuario(carrito.getIdUsuario());
+        dto.setUsuario(carrito.getUsuario());
         dto.setItems(carrito.getItems());
         return dto;
     }

@@ -1,5 +1,6 @@
 package com.example.ecommerce.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,17 +15,16 @@ public class Carrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long idUsuario;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
-    @OneToMany(mappedBy = "carrito")
+    @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL)
+    @JsonManagedReference // Esta anotación marca el lado "propietario" de la relación
     private List<ItemCarrito> items;
 
     public Carrito() {
     }
 
-    public Carrito(Long id, Long idUsuario, List<ItemCarrito> items) {
-        this.id = id;
-        this.idUsuario = idUsuario;
-        this.items = items;
-    }
+
 }

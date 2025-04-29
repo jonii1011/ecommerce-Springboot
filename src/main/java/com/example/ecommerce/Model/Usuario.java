@@ -24,12 +24,14 @@ public class Usuario {
     private Rol rol; // Enum para roles (USER, ADMIN)
 
     public Usuario() {
+        this.rol = Rol.USER;
     }
 
-    public Usuario(Long id, String nombre, String email, String password) {
+    public Usuario(Long id, String nombre, String email, String password, Rol rol) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
+        this.rol = rol != null ? rol : Rol.USER; // Asignar rol por defecto si es null
     }
 }

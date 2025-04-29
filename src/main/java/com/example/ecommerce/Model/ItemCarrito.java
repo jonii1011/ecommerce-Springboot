@@ -1,9 +1,7 @@
 package com.example.ecommerce.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,17 +12,22 @@ public class ItemCarrito {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long idCarrito;
-    private Long idProducto;
+    @ManyToOne // Relación ManyToOne con Carrito
+    @JoinColumn(name = "carrito_id", nullable = false) // Columna que referencia a Carrito
+    @JsonBackReference // Esta anotación evita que se serialice de vuelta al padre
+    private Carrito carrito;
+    @ManyToOne // Relación ManyToOne con Producto
+    @JoinColumn(name = "producto_id", nullable = false) // Columna que referencia a Producto
+    private Producto producto;
     private Integer cantidad;
 
     public ItemCarrito() {
     }
 
-    public ItemCarrito(Long id, Long idCarrito, Long idProducto, Integer cantidad) {
+    public ItemCarrito(Long id, Carrito carrito, Producto producto, Integer cantidad) {
         this.id = id;
-        this.idCarrito = idCarrito;
-        this.idProducto = idProducto;
+        this.carrito = carrito;
+        this.producto = producto;
         this.cantidad = cantidad;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.ecommerce.Dto;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import com.example.ecommerce.Model.Carrito;
+import com.example.ecommerce.Model.Producto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,24 +9,17 @@ import lombok.Setter;
 @Setter
 public class ItemCarritoDTO {
     private Long id;
-
-    @NotNull(message = "El ID del carrito es obligatorio")
-    private Long idCarrito;
-
-    @NotNull(message = "El ID del producto es obligatorio")
-    private Long idProducto;
-
-    @NotNull(message = "La cantidad es obligatoria")
-    @Positive(message = "La cantidad debe ser positiva")
+    private Carrito carrito;
+    private Producto producto;
     private Integer cantidad;
 
     public ItemCarritoDTO() {
     }
 
-    public ItemCarritoDTO(Long id, Long idCarrito, Long idProducto, Integer cantidad) {
+    public ItemCarritoDTO(Long id, Carrito carrito, Producto producto, Integer cantidad) {
         this.id = id;
-        this.idCarrito = idCarrito;
-        this.idProducto = idProducto;
+        this.carrito = carrito;
+        this.producto = producto;
         this.cantidad = cantidad;
     }
 }
