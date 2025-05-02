@@ -24,7 +24,7 @@ public class ProductoDTO {
 
     private String descripcion;
     private Integer stock;
-    private String ImagenURl;
+    private String ImagenURL;
     private String categoria;
     private Date fechaElaboracion = new Date();
     private boolean borrado;
@@ -32,14 +32,14 @@ public class ProductoDTO {
     public ProductoDTO() {
     }
 
-    public ProductoDTO(long id, String nombre, String sku, Double precio, String descripcion, Integer stock, String imagenURl, String categoria, Date fechaElaboracion, boolean borrado) {
+    public ProductoDTO(long id, String nombre, String sku, Double precio, String descripcion, Integer stock, String imagenURL, String categoria, Date fechaElaboracion, boolean borrado) {
         this.id = id;
         this.nombre = nombre;
         this.sku = sku;
         this.precio = precio;
         this.descripcion = descripcion;
         this.stock = stock;
-        ImagenURl = imagenURl;
+        ImagenURL = imagenURL;
         this.categoria = categoria;
         this.fechaElaboracion = fechaElaboracion;
         this.borrado = borrado;

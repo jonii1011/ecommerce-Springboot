@@ -42,7 +42,7 @@ public class ProductoServiceImpl implements ProductoService {
         producto.setSku(productoDTO.getSku());
         producto.setCategoria(productoDTO.getCategoria());
         producto.setStock(productoDTO.getStock());
-        producto.setImagenURL(productoDTO.getImagenURl());
+        producto.setImagenURL(productoDTO.getImagenURL());
         producto.setFechaElaboracion(productoDTO.getFechaElaboracion());
         producto.setBorrado(productoDTO.isBorrado());
         return productoRepository.save(producto);
@@ -65,7 +65,7 @@ public class ProductoServiceImpl implements ProductoService {
         dto.setDescripcion(producto.getDescripcion());
         dto.setPrecio(producto.getPrecio());
         dto.setStock(producto.getStock());
-        dto.setImagenURl(producto.getImagenURL());
+        dto.setImagenURL(producto.getImagenURL());
         dto.setCategoria(producto.getCategoria());
         dto.setFechaElaboracion(producto.getFechaElaboracion());
         producto.setBorrado(producto.isBorrado());
