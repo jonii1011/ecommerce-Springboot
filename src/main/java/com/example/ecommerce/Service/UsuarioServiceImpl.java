@@ -32,6 +32,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setRol(usuarioDTO.getRol());
         return usuarioRepository.save(usuario); // Guarda el usuario en el repositorio
     }
 
@@ -48,6 +49,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioDTO buscarUsuarioPorId(Long id) {
         Usuario usuario = usuarioRepository.findById(id).get();
         return convertirADTO(usuario);
+    }
+
+    @Override
+    public UsuarioDTO buscarUsuarioPorEmail(String email) {
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        return convertirADTO(usuario.orElse(null));
     }
 
     @Override
@@ -75,6 +82,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         dto.setId(usuario.getId());
         dto.setNombre(usuario.getNombre());
         dto.setEmail(usuario.getEmail());
+        dto.setRol(usuario.getRol());
         return dto; // Asegúrate de retornar el DTO
     }
 }

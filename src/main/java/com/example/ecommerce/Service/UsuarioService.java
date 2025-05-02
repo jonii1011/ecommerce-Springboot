@@ -12,6 +12,7 @@ public interface UsuarioService {
     Usuario registrarUsuario(UsuarioDTO usuarioDTO);
     void eliminarUsuario(@NotBlank Long id);
     UsuarioDTO buscarUsuarioPorId(@NotBlank Long id);
+    UsuarioDTO buscarUsuarioPorEmail(@NotBlank String email);
     String autenticarUsuario(LoginDTO loginDTO);
     String generarToken(Usuario usuario);
     UsuarioDTO convertirADTO(Usuario usuario);

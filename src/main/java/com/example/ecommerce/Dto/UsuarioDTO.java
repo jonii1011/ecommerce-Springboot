@@ -20,7 +20,6 @@ public class UsuarioDTO {
     private Rol rol; // Enum para roles (USER, ADMIN)
 
     public UsuarioDTO() {
-        this.rol = Rol.USER;
     }
 
     public UsuarioDTO(Long id, String nombre, String email, String password, Rol rol) {
@@ -28,6 +27,6 @@ public class UsuarioDTO {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
-        this.rol = rol != null ? rol : Rol.USER; // Asignar rol por defecto si es null
+        this.rol = rol;
     }
 }

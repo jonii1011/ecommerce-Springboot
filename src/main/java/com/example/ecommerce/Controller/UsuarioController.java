@@ -2,7 +2,9 @@ package com.example.ecommerce.Controller;
 
 import com.example.ecommerce.Dto.LoginDTO;
 import com.example.ecommerce.Dto.UsuarioDTO;
+import com.example.ecommerce.Model.AuthResponse;
 import com.example.ecommerce.Model.Usuario;
+import com.example.ecommerce.Repository.UsuarioRepository;
 import com.example.ecommerce.Service.AuthService;
 import com.example.ecommerce.Service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,10 +54,16 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    @Operation(summary = "Autenticar un usuario", description = "Autentica un usuario y devuelve un token")
-    public ResponseEntity<String> autenticarUsuario(@RequestBody LoginDTO loginDTO) {
+    @Operation(summary = "Autenticar un usuario", description = "Autentica un usuario y devuelve un token y los detalles del usuario")
+    public ResponseEntity<AuthResponse> autenticarUsuario(@RequestBody LoginDTO loginDTO) {
         String token = authService.autenticarUsuario(loginDTO.getEmail(), loginDTO.getPassword());
-        return ResponseEntity.ok(token);
+
+        // Obtén la información del usuario después de autenticar
+        UsuarioDTO dto = usuarioService.buscarUsuarioPorEmail(loginDTO.getEmail());
+
+        // Devuelve el token y la información del usuario
+        AuthResponse authResponse = new AuthResponse(token, dto);
+        return ResponseEntity.ok(authResponse);
     }
 }
 
